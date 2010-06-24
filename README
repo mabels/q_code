@@ -1,0 +1,6 @@
+   The Q Code is just a code like urlencode, but its safe for the
+   window.localtion.hash encode. I choosed the q out of the fact it
+   is the 17 letter in the alphapet. So it possible to encode hex with
+   A-P's. And the letter q is not used as much in the written languages.
+
+   Use it and feel free, i never done any performance test
