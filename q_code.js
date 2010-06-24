@@ -19,7 +19,7 @@ Q = {
           this._valid_keys[i] = String.fromCharCode(i)
         }
       }
-      var exceptions = ['=','.',';',',']
+      var exceptions = ['.',',']
       for(var j = exceptions.length-1; j >= 0; --j) {
         this._valid_keys[exceptions[j].charCodeAt(0)] = exceptions[j]
       }
@@ -91,7 +91,7 @@ Q = {
 }
 if (typeof(exports) != 'undefined') { exports = Q }
 
-function _export() { return Q; } // exports for Demandware
+function Qexport() { return Q; } // exports for Demandware
 
 /*
 base = 'ÄmenoqgiesbertQabelsÜ%'
