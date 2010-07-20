@@ -24,7 +24,6 @@ Q = {
       this._valid_keys[("X").charCodeAt(0)] = null // 8Bit Encoder
       this._valid_keys[("q").charCodeAt(0)] = null // 8Bit Encoder
       this._valid_keys[("Q").charCodeAt(0)] = null // 16Bit Encoder
-print("valid_keys:"+this._valid_keys.length)
     }
     return this._valid_keys
   },
@@ -61,7 +60,6 @@ print("valid_keys:"+this._valid_keys.length)
 
   q_decode: function(str) {
     var qq = str.substr(0,2)
-print("XXXX-1:"+str)
     if (qq == 'XX') { return { decoded: 'X', len: 2 } }
     if (qq == 'QQ') { return { decoded: 'Q', len: 2 } }
     if (qq == 'qq') { return { decoded: 'q', len: 2 } }
@@ -69,7 +67,6 @@ print("XXXX-1:"+str)
     var mode = qq.substr(0,1)
     if (mode == '+')  { return { decoded: ' ', len: 1 } }
     str = str.toUpperCase() // work save with the base
-print("XXXX-2:"+mode)
     if (mode == 'Q') {
       return { decoded: String.fromCharCode(((str.charCodeAt(1)-this.base)<<12)|((str.charCodeAt(2)-this.base)<<8)|
                                             ((str.charCodeAt(3)-this.base)<<4) |((str.charCodeAt(4)-this.base)<<0)), len: 5 }
