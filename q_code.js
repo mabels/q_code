@@ -102,6 +102,7 @@ if (typeof(exports) != 'undefined') { exports = Q }
 
 function Qexport() { return Q; } // exports for Demandware
 
+/*
 //base = 'ÄmenoqgiesbertQabelsÜ%'
 base = '{ÄmenoqgiesbertQabelsÜ%:"meno", meno: { all: "meno" }}'
 //base = 'ÄmenoÖabelsÜ'
@@ -110,3 +111,4 @@ decode = Q.decode(encode)
 print(base)
 print(encode)
 print(decode)
+*/
