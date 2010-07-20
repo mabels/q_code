@@ -4,3 +4,11 @@
    A-P's. And the letter q is not used as much in the written languages.
 
    Use it and feel free, i never done any performance test
+
+   V1.0
+   Now the hash is more readable encoded
+   I wrote a test in weet which try to find the odd behavior of the hash encoding
+   I discovered that everything is allowed except:
+    " " space ASCII 32
+    "?" questionmark ASCII 63
+   In all browser over than ie6 the exception are not valid
