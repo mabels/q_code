@@ -74,6 +74,7 @@ Q = {
     if (mode == 'q') {
       return { decoded: String.fromCharCode(((str.charCodeAt(1)-this.base)<<4)|(str.charCodeAt(2)-this.base)), len: 3 }
     }
+    return { decoded: str, len: str.length }
   },
   decode: function(hash) {
     var len = hash.length
