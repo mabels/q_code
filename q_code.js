@@ -43,7 +43,7 @@ Q = {
   },
 
   encode: function(str) {
-    var out = []
+    var out = ['!']
     var len = str.length
     var valid = this.valid_keys()
     for(var i = 0; i < len; ++i) {
@@ -77,13 +77,20 @@ Q = {
     return { decoded: str, len: str.length }
   },
   decode: function(hash) {
+    if(hash.match(/%22/)) { // heuristic for URL encoded JSON
+      hash = decodeURIComponent(hash);
+    }
+    if (hash.substr(0,1) != '!') {
+      console.log('throw "Illegal Q-Code:"+hash')
+      // throw "Illegal Q-Code:"+hash
+    }
     var len = hash.length
     var idx = 0
     var oidx = 0
     var out = []
     var valid = this.valid_keys()
     this.base = ("A").charCodeAt(0)
-    for(var i = 0; i < len; ++i) {
+    for(var i = '!'.length; i < len; ++i) {
       var c = hash.substr(i,1) 
       if (!valid[c.charCodeAt(0)]) {
         var ret = this.q_decode(hash.substr(i,5))
