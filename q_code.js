@@ -21,7 +21,10 @@ Q = {
       this._valid_keys[("+").charCodeAt(0)] = null // 8Bit Encoder
       this._valid_keys[(" ").charCodeAt(0)] = null // 8Bit Encoder
       this._valid_keys[("?").charCodeAt(0)] = null // 8Bit Encoder
+      this._valid_keys[("W").charCodeAt(0)] = null // 8Bit Encoder
+      this._valid_keys[("V").charCodeAt(0)] = null // 8Bit Encoder
       this._valid_keys[("X").charCodeAt(0)] = null // 8Bit Encoder
+      this._valid_keys[("Y").charCodeAt(0)] = null // 8Bit Encoder
       this._valid_keys[("q").charCodeAt(0)] = null // 8Bit Encoder
       this._valid_keys[("Q").charCodeAt(0)] = null // 16Bit Encoder
     }
@@ -31,8 +34,14 @@ Q = {
   q_encode: function(num) {
     // 113 = "q".charCodeAt(0)
     // 81  = "Q".charCodeAt(0)
+    if (num == 9) { return "V" }
+    if (num == 10) { return "W" }
+    if (num == 13) { return "Y" }
     if (num == 32) { return "+" }
+    if (num == 86) { return "VV" }
+    if (num == 87) { return "WW" }
     if (num == 88) { return "XX" }
+    if (num == 89) { return "YY" }
     if (num == 63) { return "X" }
     if (num == 113) { return "qq" }
     if (num == 81)  { return "QQ" }
@@ -60,11 +69,18 @@ Q = {
 
   q_decode: function(str) {
     var qq = str.substr(0,2)
+    if (qq == 'VV') { return { decoded: 'V', len: 2 } }
+    if (qq == 'WW') { return { decoded: 'W', len: 2 } }
     if (qq == 'XX') { return { decoded: 'X', len: 2 } }
+    if (qq == 'YY') { return { decoded: 'Y', len: 2 } }
     if (qq == 'QQ') { return { decoded: 'Q', len: 2 } }
     if (qq == 'qq') { return { decoded: 'q', len: 2 } }
     if (qq == '++') { return { decoded: '+', len: 2 } }
     var mode = qq.substr(0,1)
+    if (mode == 'V')  { return { decoded: "\t", len: 1 } }
+    if (mode == 'W')  { return { decoded: "\n", len: 1 } }
+    if (mode == 'X')  { return { decoded: "?", len: 1 } }
+    if (mode == 'Y')  { return { decoded: "\r", len: 1 } }
     if (mode == '+')  { return { decoded: ' ', len: 1 } }
     str = str.toUpperCase() // work save with the base
     if (mode == 'Q') {
@@ -117,3 +133,15 @@ print(base)
 print(encode)
 print(decode)
 */
+var fs = require('fs');
+fs.readFile('test.html', function(r, data) {
+  data = data.toString('UTF-8');
+  var enc = Q.encode(data);
+  fs.writeFile('test.enc', enc)
+  var dec = Q.decode(enc);
+  fs.writeFile('test.dec', dec)
+  if (data != dec) {
+    console.log(dec);
+  }
+});
+
